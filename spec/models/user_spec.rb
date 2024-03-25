@@ -7,6 +7,11 @@ RSpec.describe User, type: :model do
       user = build(:user)
       expect(user).to be_valid
     end
+
+    it 'is valid with a username, password and confirmation password' do
+      user = build(:user, password: 'password', password_confirmation: 'password')
+      expect(user).to be_valid
+    end
   end
 
   context "invalid attributes" do
@@ -38,6 +43,16 @@ RSpec.describe User, type: :model do
       user = build(:user, password: nil)  
       user.valid?
       expect(user.errors[:password]).to include("can't be blank")
+    end
+
+    it 'hashes the password using BCrypt' do
+      user = create(:user, password: 'password')
+
+      expect(user.password_digest).not_to eq 'password'
+
+      expect(BCrypt::Password.new(user.password_digest)).to be_truthy
+
+      expect(BCrypt::Password.new(user.password_digest).is_password?('password')).to be true  
     end
   end
 end
