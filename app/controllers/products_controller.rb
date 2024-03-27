@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
     before_action :set_product
-    before_action :authenticate_request
+    before_action :authenticate_request, except: [:index]
 
     def index
         products = Product.all
