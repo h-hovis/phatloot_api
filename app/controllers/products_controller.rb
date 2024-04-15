@@ -44,6 +44,12 @@ class ProductsController < ApplicationController
         end
     end
 
+    def my_products
+        products = @current_user.products
+
+        render json: ProductBlueprint.render(products, view: :normal), status: :ok
+    end
+
     private
 
     def set_product
