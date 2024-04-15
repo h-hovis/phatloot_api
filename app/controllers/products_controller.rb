@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
     end
 
     def create
-        product = Product.new(product.params)
+        product = @current_user.products.new(product_params)
 
         if product.save
             render json: ProductBlueprint.render(product, view: :normal), status: :created 
