@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-    before_action :set_user
-
+    
     def index
         users = User.all
         render json: UserBlueprint.render(users, view: :normal), status: :ok
@@ -49,6 +48,6 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
     end
     def user_params
-        params.permit(:first_name, :last_name, :email, :username, :password, :password_confirmation)
+        params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :password_confirmation)
     end
 end
