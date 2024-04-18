@@ -15,7 +15,7 @@ RSpec.describe "Products", type: :request do
   describe "GET /index" do
     before do
       create_list(:product, 10)
-      get "/products"
+      get "/products/my_products"
       body = JSON.parse(response.body) 
     end
 
@@ -42,7 +42,7 @@ RSpec.describe "Products", type: :request do
     let (:product_id) { create(:product).id }
 
     before do
-      get "/products/#{product_id}"
+      get "/products/my_products/#{product_id}"
       body = JSON.parse(response.body)
     end
 

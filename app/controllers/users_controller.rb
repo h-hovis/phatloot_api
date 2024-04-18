@@ -1,15 +1,5 @@
 class UsersController < ApplicationController
     
-    def index
-        users = User.all
-        render json: UserBlueprint.render(users, view: :normal), status: :ok
-    end
-
-    def show
-        user = User.find(params[:id])
-        render json: UserBlueprint.render(@user, view: :normal), status: :ok
-    end
-
     def create
         user = User.new(user_params)
 

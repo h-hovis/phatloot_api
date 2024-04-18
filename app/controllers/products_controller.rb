@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    # before_action :authenticate_request, except: [:index]
+    before_action :authenticate_request, except: [:index]
 
     def index
         products = Product.all
